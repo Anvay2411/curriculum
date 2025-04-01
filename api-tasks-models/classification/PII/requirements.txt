@@ -1,3 +1,4 @@
+sentencepiece
 presidio-analyzer[transformers]
 presidio-analyzer[stanza]
 presidio-anonymizer
@@ -7,3 +8,4 @@ torch
 flair
 openai
 azure-ai-textanalytics
+--extra-index-url https://download.pytorch.org/whl/cpu
