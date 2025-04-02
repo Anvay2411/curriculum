@@ -4,7 +4,7 @@ pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization@2.1",
 
 
 # apply the pipeline to an audio file
-diarization = pipeline("audio.wav")
+diarization = pipeline("./samples/sample.wav")
 
 # dump the diarization output to disk using RTTM format
 with open("audio.rttm", "w") as rttm:
