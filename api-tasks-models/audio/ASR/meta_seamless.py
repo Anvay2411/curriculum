@@ -1,4 +1,5 @@
 import torch
+import torchaudio
 from transformers import SeamlessM4TModel, AutoProcessor
 import librosa
 
@@ -8,18 +9,12 @@ model = SeamlessM4TModel.from_pretrained(model_id).to("cuda" if torch.cuda.is_av
 processor = AutoProcessor.from_pretrained(model_id)
 
 # Load audio file
-audio_filepath = "./samples/modi_speech.wav"
-audio_input, sr = librosa.load(audio_filepath, sr=16000, mono=True) # Ensure consistent sample rate
+# Read an audio file and resample to 16kHz:
+audio, orig_freq =  torchaudio.load("./samples/sample.wav")
+audio =  torchaudio.functional.resample(audio, orig_freq=orig_freq, new_freq=16_000) # must be a 16 kHz waveform array
+audio_inputs = processor(audios=audio, return_tensors="pt")
 
-# Preprocess the audio
-inputs = processor(audio_input, sampling_rate=sr, return_tensors="pt").to(model.device)
-
-
-# Perform inference
-with torch.no_grad():
-    generated_ids = model.generate(**inputs)
-
-# Decode the generated IDs to text
-transcription = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
+output_tokens = model.generate(**audio_inputs, tgt_lang="fra", generate_speech=False)
+transcription = processor.decode(output_tokens[0].tolist()[0], skip_special_tokens=True)
 
 print(transcription)
