@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/125876e479d54a58a5fbb3fcb0a74e5a/artifacts
+end_time: 1738131540388
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 125876e479d54a58a5fbb3fcb0a74e5a
+run_name: clumsy-eel-189
+run_uuid: 125876e479d54a58a5fbb3fcb0a74e5a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738131502579
+status: 3
+tags: []
+user_id: thebeginner86

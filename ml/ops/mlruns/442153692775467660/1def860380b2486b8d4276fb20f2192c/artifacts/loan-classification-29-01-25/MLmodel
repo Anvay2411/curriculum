@@ -1,0 +1,33 @@
+artifact_path: loan-classification-29-01-25
+flavors:
+  python_function:
+    data: model.xgb
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.10.12
+  xgboost:
+    code: null
+    data: model.xgb
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: xgb
+    xgb_version: 2.0.3
+mlflow_version: 2.18.0
+model_size_bytes: 6699
+model_uuid: 749502c707cc48ec9eb478cca0062681
+run_id: 1def860380b2486b8d4276fb20f2192c
+signature:
+  inputs: '[{"type": "long", "name": "loan_id", "required": true}, {"type": "long",
+    "name": "no_of_dependents", "required": true}, {"type": "long", "name": "education",
+    "required": true}, {"type": "long", "name": "self_employed", "required": true},
+    {"type": "long", "name": "income_annum", "required": true}, {"type": "long", "name":
+    "loan_amount", "required": true}, {"type": "long", "name": "loan_term", "required":
+    true}, {"type": "long", "name": "cibil_score", "required": true}, {"type": "long",
+    "name": "residential_assets_value", "required": true}, {"type": "long", "name":
+    "commercial_assets_value", "required": true}, {"type": "long", "name": "luxury_assets_value",
+    "required": true}, {"type": "long", "name": "bank_asset_value", "required": true},
+    {"type": "long", "name": "total_asset", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "int64", "shape": [-1]}}]'
+  params: null
+utc_time_created: '2025-01-29 06:33:10.328005'
