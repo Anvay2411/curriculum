@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/cf3c751017194faa92e26fed865f3a7f/artifacts
+end_time: 1738132373953
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cf3c751017194faa92e26fed865f3a7f
+run_name: industrious-shrew-64
+run_uuid: cf3c751017194faa92e26fed865f3a7f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738132368473
+status: 3
+tags: []
+user_id: thebeginner86

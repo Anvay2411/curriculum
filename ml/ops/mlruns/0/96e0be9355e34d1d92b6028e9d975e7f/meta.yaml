@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/0/96e0be9355e34d1d92b6028e9d975e7f/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 96e0be9355e34d1d92b6028e9d975e7f
+run_name: abundant-ray-659
+run_uuid: 96e0be9355e34d1d92b6028e9d975e7f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738132396599
+status: 1
+tags: []
+user_id: thebeginner86

@@ -1,0 +1,15 @@
+artifact_uri: /home/thebeginner86/code/ml/ops/mlruns/442153692775467660/1def860380b2486b8d4276fb20f2192c/artifacts
+end_time: 1738132396548
+entry_point_name: ''
+experiment_id: '442153692775467660'
+lifecycle_stage: active
+run_id: 1def860380b2486b8d4276fb20f2192c
+run_name: exp-4
+run_uuid: 1def860380b2486b8d4276fb20f2192c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1738132373962
+status: 3
+tags: []
+user_id: thebeginner86

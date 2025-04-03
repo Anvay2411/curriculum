@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1738132396700
+current_stage: None
+description: ''
+last_updated_timestamp: 1738132396700
+name: xgboost-model-29-01-25
+run_id: ''
+run_link: ''
+source: mlflow-artifacts:/0/96e0be9355e34d1d92b6028e9d975e7f/artifacts/loan-classification-29-01-25
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/0/96e0be9355e34d1d92b6028e9d975e7f/artifacts/loan-classification-29-01-25
+user_id: null
+version: 2
