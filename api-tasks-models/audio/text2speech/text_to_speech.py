@@ -169,4 +169,5 @@ class text_to_speech:
 if __name__ == '__main__':
 
     tsp_obj = text_to_speech()
-    res = tsp_obj.get_speech(sys.argv[1])
+    text = "Hello world!"
+    res = tsp_obj.get_speech(text)
