@@ -1,0 +1,235 @@
+./bench.sh -d ./HammerDB-4.8 -u postgres -p postgres -w 1 -t fill,bench -v 1 -db pg -r 1 -port 5432 -b 1 -n "-C 6-11" -dbc "0-5" -o /root/kubernetes_files/thebeginner86/workloads/db/Hamme
+rRuns --verbose
+taskset: invalid PID argument: '0-5'
+
++++++++++++++++++++++++++++++++++++++++++++++
+Filling Database with 1 warehouses
++++++++++++++++++++++++++++++++++++++++++++++
+
+Created HammerDB fill scripts at /root/kubernetes_files/thebeginner86/workloads/db/HammerRuns/HammerDB-Run-2025-02-04_23:34:45/scripts/pg_fill.tcl
+HammerDB CLI v4.8
+Copyright (C) 2003-2023 Steve Shaw
+Type "help" for a list of commands
+Initialized Jobs on-disk database /tmp/hammer.DB using existing tables (114,688 KB)
+Database set to PostgreSQL
+Benchmark set to TPC-C for PostgreSQL
+Value postgres for tpcc:pg_pass is the same as existing value postgres, no change made
+Value postgres for tpcc:pg_user is the same as existing value postgres, no change made
+Value localhost for connection:pg_host is the same as existing value localhost, no change made
+Value 5432 for connection:pg_port is the same as existing value 5432, no change made
+Value postgres for tpcc:pg_superuserpass is the same as existing value postgres, no change made
+Value postgres for tpcc:pg_superuser is the same as existing value postgres, no change made
+Value 1 for tpcc:pg_count_ware is the same as existing value 1, no change made
+Value 1 for tpcc:pg_num_vu is the same as existing value 1, no change made
+Value 10000000 for tpcc:pg_total_iterations is the same as existing value 10000000, no change made
+Script cleared
+Building 1 Warehouses(s) with 1 Virtual User
+Ready to create a 1 Warehouse PostgreSQL TPROC-C schema
+in host LOCALHOST:5432 sslmode PREFER under user POSTGRES in database TPCC?
+Enter yes or no: replied yes
+Vuser 1 created - WAIT IDLE
+Vuser 1:RUNNING
+Vuser 1:CREATING POSTGRES SCHEMA
+Vuser 1:CREATING DATABASE tpcc under OWNER postgres
+Vuser 1:Using existing User postgres for Schema build
+Vuser 1:CREATING TPCC TABLES
+Vuser 1:Loading Item
+Vuser 1:Loading Items - 10000
+Vuser 1:Loading Items - 20000
+Vuser 1:Loading Items - 30000
+Vuser 1:Loading Items - 40000
+Vuser 1:Loading Items - 50000
+Vuser 1:Loading Items - 60000
+Vuser 1:Loading Items - 70000
+Vuser 1:Loading Items - 80000
+Vuser 1:Loading Items - 90000
+Vuser 1:Loading Items - 100000
+Vuser 1:Item done
+Vuser 1:Start:Tue Feb 04 23:34:48 EST 2025
+Vuser 1:Loading Warehouse
+Vuser 1:Loading Stock Wid=1
+Vuser 1:Loading Stock - 20000
+Vuser 1:Loading Stock - 40000
+Vuser 1:Loading Stock - 60000
+Vuser 1:Loading Stock - 80000
+Vuser 1:Loading Stock - 100000
+Vuser 1:Stock done
+Vuser 1:Loading District
+Vuser 1:District done
+Vuser 1:Loading Customer for DID=1 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Customer for DID=2 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Customer for DID=3 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Customer for DID=4 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Customer for DID=5 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Customer for DID=6 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Customer for DID=7 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Customer for DID=8 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Customer for DID=9 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Customer for DID=10 WID=1
+Vuser 1:Customer Done
+Vuser 1:Loading Orders for D=1 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:Loading Orders for D=2 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:Loading Orders for D=3 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:Loading Orders for D=4 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:Loading Orders for D=5 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:Loading Orders for D=6 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:Loading Orders for D=7 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:Loading Orders for D=8 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:Loading Orders for D=9 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:Loading Orders for D=10 W=1
+Vuser 1:...1000
+Vuser 1:...2000
+Vuser 1:...3000
+Vuser 1:Orders Done
+Vuser 1:End:Tue Feb 04 23:35:08 EST 2025
+Vuser 1:CREATING TPCC INDEXES
+Vuser 1:CREATING TPCC FUNCTIONS
+Vuser 1:GATHERING SCHEMA STATISTICS
+Vuser 1:POSTGRES SCHEMA COMPLETE
+Vuser 1:FINISHED SUCCESS
+ALL VIRTUAL USERS COMPLETE
+
++++++++++++++++++++++++++++++++++++++++++++++
+Running Benchmark with 1 virtual users
++++++++++++++++++++++++++++++++++++++++++++++
+
+Created HammerDB bench scripts at /root/kubernetes_files/thebeginner86/workloads/db/HammerRuns/HammerDB-Run-2025-02-04_23:34:45/scripts/pg_bench.tcl
+HammerDB CLI v4.8
+Copyright (C) 2003-2023 Steve Shaw
+Type "help" for a list of commands
+Initialized Jobs on-disk database /tmp/hammer.DB using existing tables (122,880 KB)
+Database set to PostgreSQL
+Benchmark set to TPC-C for PostgreSQL
+Value postgres for tpcc:pg_pass is the same as existing value postgres, no change made
+Value postgres for tpcc:pg_user is the same as existing value postgres, no change made
+Value localhost for connection:pg_host is the same as existing value localhost, no change made
+Value 5432 for connection:pg_port is the same as existing value 5432, no change made
+Value postgres for tpcc:pg_superuserpass is the same as existing value postgres, no change made
+Value postgres for tpcc:pg_superuser is the same as existing value postgres, no change made
+No Virtual Users found to destroy
+Value timed for tpcc:pg_driver is the same as existing value timed, no change made
+Value true for tpcc:pg_timeprofile is the same as existing value true, no change made
+Value 1 for tpcc:pg_rampup is the same as existing value 1, no change made
+Value 1 for tpcc:pg_duration is the same as existing value 1, no change made
+Script loaded, Type "print script" to view
+Vuser 1 created MONITOR - WAIT IDLE
+Vuser 2 created - WAIT IDLE
+Logging activated
+to /tmp/hammerdb.log
+2 Virtual Users Created with Monitor VU
+Vuser 1:RUNNING
+Vuser 1:Initializing xtprof time profiler
+Vuser 1:Beginning rampup time of 1 minutes
+Vuser 2:RUNNING
+Vuser 2:Initializing xtprof time profiler
+Vuser 2:Processing 10000000 transactions with output suppressed...
+Vuser 1:Rampup 1 minutes complete ...
+Vuser 1:Rampup complete, Taking start Transaction Count.
+Vuser 1:Timing test period of 1 in minutes
+Vuser 1:1 ...,
+Vuser 1:Test complete, Taking end Transaction Count.
+Vuser 1:1 Active Virtual Users configured
+Vuser 1:TEST RESULT : System achieved 27148 NOPM from 62466 PostgreSQL TPM
+Vuser 1:Gathering timing data from Active Virtual Users...
+Vuser 2:FINISHED SUCCESS
+Vuser 1:Calculating timings...
+Vuser 1:Writing timing data to /tmp/hdbxtprofile.log
+Vuser 1:FINISHED SUCCESS
+ALL VIRTUAL USERS COMPLETE
+vudestroy success
+
++++++++++++++++++++++++++++++++++++++++++++++
+Summarizing results
++++++++++++++++++++++++++++++++++++++++++++++
+
+Scripts can be found at: /root/kubernetes_files/thebeginner86/workloads/db/HammerRuns/HammerDB-Run-2025-02-04_23:34:45/scripts
+Logs can be found at: /root/kubernetes_files/thebeginner86/workloads/db/HammerRuns/HammerDB-Run-2025-02-04_23:34:45/logs
+Summary can be found at: /root/kubernetes_files/thebeginner86/workloads/db/HammerRuns/HammerDB-Run-2025-02-04_23:34:45/summary
+
+--------------------------
+DATABASE
+--------------------------
+Database: pg
+DB Host: localhost
+DB Port: 5432
+DB User: postgres
+DB Password: postgres
+Database Core Affinity: 0-5
+
+--------------------------
+HAMMER DB
+--------------------------
+HammerDB Path: ./HammerDB-4.8
+HammerDB Core Affinity: 6-11
+Data Warehouses: 1
+Virtual Users: 1
+Rampup Duration: 1
+Benchmark Duration: 1
+Iterations: 10000000
+
+--------------------------
+SYSTEM
+--------------------------
+Operating System: CentOS Stream 9
+Kernel Version: Linux 6.6.0-srf.bkc.6.6.20.6.19.x86_64
+CPU: GENUINE INTEL(R) XEON(R)
+GENUINE INTEL(R) XEON(R)
+PostgreSQL Version: 13.18
+
+--------------------------
+GENERATED FILES
+--------------------------
+Summary file: /root/kubernetes_files/thebeginner86/workloads/db/HammerRuns/HammerDB-Run-2025-02-04_23:34:45/summary
+Scripts Directory: /root/kubernetes_files/thebeginner86/workloads/db/HammerRuns/HammerDB-Run-2025-02-04_23:34:45/scripts
+Logs Directory: /root/kubernetes_files/thebeginner86/workloads/db/HammerRuns/HammerDB-Run-2025-02-04_23:34:45/logs
+
+--------------------------
+RESULTS
+--------------------------
+NOPM: 27148
+TPM: 62466
