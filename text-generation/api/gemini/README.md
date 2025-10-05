@@ -43,6 +43,20 @@ Alternatively, you could also export the variable:
    export GEMINI_API_KEY=your_gemini_api_key_here
    ```
 
+### Step 6: Create an environment:
+```bash
+uv venv 
+# Activate the env
+source .venv/bin/activate
+# Install requirements
+uv pip install -r requirements.txt
+```
+
+### Step 7: Run the inference file:
+```bash
+python inference.py
+```
+
 ## Security Considerations
 
 To ensure your API key is secure:
