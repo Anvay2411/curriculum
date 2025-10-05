@@ -47,7 +47,7 @@ def main():
                     "content": prompt
                 }
             ],
-            model="llama3-70b-8192",
+            model="llama-3.3-70b-versatile",
             max_tokens=args.max_tokens,
             temperature=args.temperature,
             top_p=args.top_p
