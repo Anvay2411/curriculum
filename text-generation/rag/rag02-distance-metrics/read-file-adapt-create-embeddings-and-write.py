@@ -26,5 +26,7 @@ embedded_docs_texts = embedder.embed_documents(text_docs)
 
 
 # Testing the Qdrant Database 
-vector_db = VectorDB(similarity_method="cosine", path = 'vector_database/data', collection_name = "test4")
+# You can choose the distance metric for similarity search by setting the 'similarity_method' parameter.
+# Available options: "cosine", "dot", "euclidean", "manhattan"
+vector_db = VectorDB(path='vector_database/data', collection_name="test_dist_metrics", similarity_method="cosine")
 vector_db.insert_docs_embeddings(embedded_docs_texts, texts)

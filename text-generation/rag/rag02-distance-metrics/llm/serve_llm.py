@@ -6,7 +6,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
 
 class LLM: 
-    def __init__(self, model_name: str = "meta-llama/Llama-2-7b-chat-hf", verbose: bool = True): 
+    def __init__(self, model_name: str = "meta-llama/Llama-3.2-1B-Instruct", verbose: bool = True): 
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForCausalLM.from_pretrained(model_name)
         self.pipeline = pipeline(task="text-generation", model = self.model, tokenizer = self.tokenizer, temperature = 0.1)
