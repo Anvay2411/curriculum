@@ -113,13 +113,24 @@ class RecursiveCharacterTextSplitter:
         
 
 class Adapter: 
-    def __init__(self, chunk_size:int = 512, verbose: bool = True) -> str: 
+    def __init__(self, chunk_size:int = 512, splitter: str = "recursive", chunk_overlap: int = 50, verbose: bool = True) -> str: 
         self._chunk_size = chunk_size 
         self.verboseprint = print if verbose else lambda *a : None 
 
         self.verboseprint(f" ADAPTER: Adapter initialised successfully with the following configuration: chunk_size = {self._chunk_size}")
 
-        self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=self._chunk_size)
+        if splitter == "simple":
+            self.text_splitter = SimpleChunker(chunk_size=self._chunk_size)
+        elif splitter == "overlap":
+            self.text_splitter = OverlapTextSplitter(chunk_size=self._chunk_size, chunk_overlap=chunk_overlap)
+        elif splitter == "token":
+            self.text_splitter = TokenSplitter(chunk_size=self._chunk_size)
+        elif splitter == "recursive":
+            self.text_splitter = RecursiveCharacterTextSplitter(chunk_size=self._chunk_size)
+        else:
+            raise ValueError(f"Unknown splitter: {splitter}. Available options are: simple, overlap, token, recursive.")
+
+        self.verboseprint(f"ADAPTER: Using {splitter} splitter.")
 
     def _convert_to_document(self, text:str, metadata: str = None) -> Document: 
         return Document(page_content = text, metadata = metadata)

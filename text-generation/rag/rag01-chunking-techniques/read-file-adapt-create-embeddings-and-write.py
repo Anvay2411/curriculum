@@ -4,7 +4,10 @@ import numpy as np
 from adapter.adapter import Adapter
 from reader.reader import Reader 
 from embedder.embedder import Embedder
-from vector_database.vector_database import VectorDB 
+from vector_database.vector_database import VectorDB
+
+import nltk
+nltk.download('punkt_tab')
 
 
 # Reading or parsing a PDF 
@@ -13,7 +16,9 @@ texts = pdf_reader.extract_text()
 
 
 # Testing Adapter 
-adapter_instance = Adapter(chunk_size = 500)
+# You can choose your chunking strategy by setting the 'splitter' parameter.
+# Available options: "simple", "overlap", "token", "recursive"
+adapter_instance = Adapter(chunk_size = 500, splitter="token")
 
 
 # Tested the overlapping is happending and breaking down into chunks. 
