@@ -9,7 +9,7 @@ class LLM:
     def __init__(self, model_name: str = "meta-llama/Llama-2-7b-chat-hf", verbose: bool = True): 
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForCausalLM.from_pretrained(model_name)
-        self.pipeline = pipeline(task="text-generation", model = self.model, tokenizer = self.tokenizer, temperature = 0.1)
+        self.pipeline = pipeline(task="text-generation", model = self.model, tokenizer = self.tokenizer, temperature = 0.1, )
         self.verboseprint = print if verbose else lambda *a: None 
 
     def _summary_prompt(self, input_table: str): 

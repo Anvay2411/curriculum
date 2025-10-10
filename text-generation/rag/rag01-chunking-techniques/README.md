@@ -34,7 +34,7 @@ This project uses `uv` for package management.
 
 3.  Install the required dependencies. Note that `nltk` has been added for the `TokenSplitter`.
     ```bash
-    uv pip install -r requirements.txt
+    uv pip install -r requirements.txt --torch-backend=cpu
     ```
 4. Download `nltk` tokenizer data:
    The `TokenSplitter` requires the `punkt` sentence tokenizer from `nltk`. Run the following command to download it:

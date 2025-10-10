@@ -27,7 +27,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 3.  Install the required dependencies from `requirements.txt`:
     ```bash
-    uv pip install -r requirements.txt
+    uv pip install -r requirements.txt --torch-backend=cpu
     ```
 
 ## Pipeline Workflow

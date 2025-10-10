@@ -18,7 +18,7 @@
 Install the dependencies in a virtual environment and run the files read-file-adapt-create-embeddings-and-write.py followed by ask_chatbot.py
 ```bash
 $ source activate rag_env
-$ pip install -r requirements.txt
+$ uv pip install -r requirements.txt --torch-backend=cpu
 $ python read-file-adapt-create-embeddings-and-write.py
 $ python ask_chatbot.py
 ```

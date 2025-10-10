@@ -13,7 +13,7 @@ class VectorDB:
     def __init__(self, path: str = 'data', collection_name: str = "RAG", embedding_size: int = 1024, similarity_method = Distance.COSINE, verbose: bool = True): 
         self.collection_name = collection_name
         self.verboseprint = print if verbose else lambda *a: None
-        self.client = QdrantClient(path = path)
+        self.client = QdrantClient(path=path)
 
         if os.path.exists(os.path.join(path, 'collection', collection_name)):
             self.verboseprint(f"Database Loaded")
