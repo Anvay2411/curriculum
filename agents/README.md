@@ -1,12 +1,71 @@
-# Agent Learning Scripts
+# AI Agent Framework
 
-A collection of learning scripts for building AI agents with function calling capabilities using Groq API.
+A modular, extensible framework for building intelligent agents with tool calling, reasoning loops, and memory management. Includes both learning examples and production-ready core components.
+
+## 🎯 Overview
+
+This framework provides:
+- **LLM-Agnostic Provider Interface**: Support for Groq, OpenAI, Ollama, etc.
+- **Tool System**: Pluggable tools with automatic OpenAI function calling format conversion
+- **Memory Management**: Short-term conversation history + long-term observation logging
+- **Agent Loop**: Structured reasoning (thought → plan → act → observe)
+- **Learning Examples**: Simple calculator agent and structured response examples
 
 ## 📋 Prerequisites
 
 - Python 3.8 or higher
 - Windows, macOS, or Linux
 - Internet connection for API calls
+
+## 📁 Project Structure
+
+```
+agents/
+├── core/                          # Framework Core
+│   ├── __init__.py               # Framework exports
+│   ├── llm_provider.py           # LLM abstraction (Groq, OpenAI, Ollama)
+│   ├── tool.py                   # Tool base class & registry
+│   ├── memory.py                 # Short-term + long-term memory
+│   └── agent.py                  # Main agent loop
+├── simple_agent.py               # Learning example: Simple calculator
+├── agent_structure.py            # Learning example: Structured responses
+├── framework_example.py          # Framework demo: Multi-tool agent
+├── requirements.txt              # Dependencies
+└── README.md                     # This file
+```
+
+## 🏗️ Architecture
+
+### Core Components
+
+#### 1. LLM Provider (`core/llm_provider.py`)
+Abstracts LLM implementations with a common interface:
+- `LLMProvider`: Abstract base class
+- `GroqProvider`: Groq API implementation
+- `OllamaProvider`: Local Ollama models
+- Easily extensible for OpenAI, Claude, etc.
+
+#### 2. Tool System (`core/tool.py`)
+Pluggable tool architecture:
+- `Tool`: Base class for all tools
+- `FunctionTool`: Adapter to wrap Python functions
+- `ToolRegistry`: Manages available tools
+- Automatic conversion to OpenAI function calling format
+
+#### 3. Memory (`core/memory.py`)
+Structured memory management:
+- **Short-term**: Conversation history for LLM context
+- **Long-term**: Observation log of all tool executions and reasoning
+- Methods for querying, filtering, and exporting
+
+#### 4. Agent Loop (`core/agent.py`)
+Main reasoning loop:
+1. Accept user query
+2. Call LLM with conversation history
+3. Parse structured reasoning (JSON)
+4. Decide: use tool or respond
+5. Execute tool or return final answer
+6. Repeat until max iterations or completion
 
 ## 🚀 Quick Start
 
@@ -53,10 +112,10 @@ source .venv/bin/activate
 uv pip install -r requirements.txt
 
 # Or install individually:
-uv add groq instructor pydantic
+uv add groq instructor pydantic python-dotenv
 
 # Or using pip if you prefer:
-# pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Step 4: Set Up Groq API Key
@@ -90,7 +149,7 @@ uv add groq instructor pydantic
    echo "GROQ_API_KEY=your_api_key_here" > .env
    ```
 
-## 🎯 Running the Learning Script
+## 🎯 Running the Learning Scripts
 
 ### Simple Agent (Calculator)
 
@@ -144,10 +203,174 @@ This script requires additional packages:
 uv add instructor pydantic
 
 # Or using pip:
-# pip install instructor pydantic
+pip install instructor pydantic
 ```
 
-#### Running on WSL (Windows Subsystem for Linux)
+## 🚀 Using the Framework
+
+### Basic Example
+
+```python
+from core import Agent, AgentConfig, GroqProvider, ToolRegistry
+
+# 1. Initialize LLM
+llm = GroqProvider(model="llama-3.3-70b-versatile")
+
+# 2. Create tool registry and add tools
+tools = ToolRegistry()
+tools.register_function(
+    my_function,
+    name="my_tool",
+    description="What this tool does"
+)
+
+# 3. Configure agent
+config = AgentConfig(
+    max_iterations=10,
+    verbose=True,
+    system_prompt="You are a helpful assistant..."
+)
+
+# 4. Create and run agent
+agent = Agent(llm, tools, config)
+state = agent.run("User query here")
+
+# 5. Access results
+print(state.final_response)
+print(f"Status: {state.status}")
+print(f"Tool calls: {state.tool_calls}")
+```
+
+### Running the Framework Example
+
+```bash
+python framework_example.py
+```
+
+This demonstrates:
+- Multiple tools (calculator, web search, fact retriever)
+- Complex reasoning flow
+- Memory management
+- Verbose iteration tracking
+
+### Complete Example: Custom Agent
+
+See `framework_example.py` for a complete implementation with:
+- 3 different tools
+- Complex reasoning
+- Error handling
+- Memory inspection
+
+## 🛠️ Extending the Framework
+
+### Adding a New Tool
+
+```python
+from core import Tool
+from typing import Any
+
+class CustomTool(Tool):
+    @property
+    def name(self) -> str:
+        return "my_custom_tool"
+    
+    @property
+    def description(self) -> str:
+        return "Description of what the tool does"
+    
+    def execute(self, **kwargs: Any) -> dict[str, Any]:
+        # Your implementation
+        result = do_something(kwargs.get("param"))
+        return {"result": result}
+    
+    def _build_parameters(self) -> dict[str, Any]:
+        return {
+            "type": "object",
+            "properties": {
+                "param": {
+                    "type": "string",
+                    "description": "Parameter description"
+                }
+            },
+            "required": ["param"]
+        }
+
+# Register it
+tools = ToolRegistry()
+tools.register(CustomTool())
+```
+
+### Using Different LLM Providers
+
+```python
+# Groq (default)
+llm = GroqProvider(model="llama-3.3-70b-versatile")
+
+# Ollama (local)
+llm = OllamaProvider(base_url="http://localhost:11434", model="llama2")
+
+# Your custom provider
+class MyProvider(LLMProvider):
+    def generate(self, messages, tools=None, ...):
+        # Your implementation
+        pass
+```
+
+### Customizing Agent Behavior
+
+```python
+config = AgentConfig(
+    max_iterations=15,          # Increase iteration limit
+    verbose=False,              # Disable verbose output
+    temperature=0.3,            # More deterministic
+    system_prompt="Custom prompt here..."
+)
+
+agent = Agent(llm, tools, config)
+```
+
+### Accessing Agent Memory
+
+```python
+state = agent.run(query)
+
+# Get full memory state
+memory_dict = agent.get_memory_state()
+print(memory_dict["total_messages"])
+print(memory_dict["total_observations"])
+
+# Short-term conversation history
+conversation = agent.memory.get_conversation_history()
+
+# Long-term observations
+observations = agent.memory.get_observations(
+    observation_type="tool",  # Optional filter
+    limit=5  # Get last 5
+)
+```
+
+## 📊 Agent State and Reasoning Trace
+
+After running an agent, inspect detailed execution:
+
+```python
+state = agent.run(query)
+
+# Overall state
+print(f"Status: {state.status}")  # "completed", "max_iterations", "error"
+print(f"Iterations: {state.iteration}")
+print(f"Tool calls: {state.tool_calls}")
+print(f"Final response: {state.final_response}")
+
+# Reasoning trace (JSON from each iteration)
+for i, reasoning in enumerate(state.reasoning_trace):
+    print(f"Step {i}: {reasoning['thought']}")
+    print(f"  Action: {reasoning['action']}")
+    if reasoning.get('tool_name'):
+        print(f"  Tool: {reasoning['tool_name']}")
+```
+
+## 🔄 Running on WSL (Windows Subsystem for Linux)
 
 If you prefer to run the scripts on WSL for a Linux environment:
 
