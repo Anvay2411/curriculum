@@ -1,11 +1,12 @@
 import time 
 from typing import List 
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline # type: ignore
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline 
 
 
 
 class LLM: 
-    def __init__(self, model_name: str = "google/flan-t5-small", verbose: bool = True): 
+    def __init__(self, model_name: str = "distilgpt2"
+, verbose: bool = True): 
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForCausalLM.from_pretrained(model_name)
         self.pipeline = pipeline(task="text-generation", model = self.model, tokenizer = self.tokenizer, temperature = 0.1,  return_full_text=False)

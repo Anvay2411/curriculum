@@ -17,6 +17,7 @@ while True:
 
     top_k = vector_db.query_embeddings(query_embedding)
     top_chunks_list = [point.payload['text'] for point in top_k]
+
     top_chunks_string = '\n'.join(top_chunks_list)
     print(f"Top chunks are: {top_chunks_string}")
 
