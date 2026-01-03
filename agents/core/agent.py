@@ -20,10 +20,18 @@ class AgentConfig:
     verbose: bool = True
     temperature: float = 0.7
     system_prompt: str = (
-        "You are a helpful AI assistant. You have access to tools to help answer questions. "
-        "When you need information, use the available tools. Always provide clear reasoning "
-        "for your decisions. Respond with JSON containing your 'thought', 'action' (tool|respond), "
-        "and if action is 'tool', provide 'tool_name' and 'tool_input'."
+        "You are a helpful AI assistant. You have access to tools to help answer questions.\n\n"
+        "IMPORTANT: Always respond with ONLY a JSON object (no other text) in this exact format:\n"
+        "{\n"
+        '  "thought": "Your reasoning here",\n'
+        '  "action": "tool" or "respond",\n'
+        '  "tool_name": "name_of_tool" (ONLY if action is tool),\n'
+        '  "tool_input": {"parameter": "value"} (ONLY if action is tool),\n'
+        '  "response": "Your final answer" (ONLY if action is respond)\n'
+        "}\n\n"
+        "When you need information, use the available tools. "
+        "When you have enough information to answer, respond with action='respond'. "
+        "Always provide clear reasoning in the 'thought' field."
     )
 
 
@@ -130,7 +138,7 @@ class Agent:
             action = reasoning.get("action", "respond").lower()
 
             if action == "tool":
-                # Execute tool
+                # Extract tool name and input
                 tool_name = reasoning.get("tool_name", "")
                 tool_input = reasoning.get("tool_input", {})
 
@@ -138,18 +146,22 @@ class Agent:
                     print(f"Tool: {tool_name}")
                     print(f"Input: {json.dumps(tool_input, indent=2)}")
 
+                # Execute tool
                 result = self.tools.execute(tool_name, **tool_input)
                 self.state.tool_calls += 1
 
-                # Add tool result to memory
+                # Add assistant message with the decision to use a tool
                 self.memory.add_message("assistant", llm_response.content)
-                tool_result_msg = json.dumps(result)
-                self.memory.add_message("tool", tool_result_msg)
+                
+                # Add tool result as a user message (workaround for Groq API)
+                # This avoids needing tool_call_id for the Groq API
+                tool_result_summary = f"Tool '{tool_name}' returned: {json.dumps(result)}"
+                self.memory.add_message("user", tool_result_summary)
 
                 # Log observation
                 self.memory.add_observation(
                     observation_type="tool",
-                    content=tool_result_msg,
+                    content=json.dumps(result),
                     tool_name=tool_name,
                     metadata={"input": tool_input},
                 )
@@ -234,7 +246,18 @@ class Agent:
 
             if start != -1 and end > start:
                 json_str = content[start:end]
-                return json.loads(json_str)
+                parsed = json.loads(json_str)
+                
+                # Validate that we have at least thought and action
+                if "thought" in parsed and "action" in parsed:
+                    return parsed
+                else:
+                    # JSON exists but missing required fields
+                    return {
+                        "thought": parsed.get("thought", "No structured reasoning provided"),
+                        "action": parsed.get("action", "respond"),
+                        "response": content,
+                    }
             else:
                 # Fallback: treat entire response as response
                 return {
