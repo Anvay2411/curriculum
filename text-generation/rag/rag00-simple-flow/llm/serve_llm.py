@@ -1,6 +1,6 @@
 import time 
 from typing import List 
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline # type: ignore
 
 
 
